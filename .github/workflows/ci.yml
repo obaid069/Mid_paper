@@ -1,0 +1,70 @@
+name: CI/CD Pipeline
+
+# Trigger the workflow on push to 'feature/*', 'develop', and 'main' branches
+on:
+  push:
+    branches:
+      - 'feature/*'     # Any feature branches
+      - 'develop'       # Develop branch
+      - 'main'          # Main branch
+
+  # Optional: Trigger on pull request events
+  pull_request:
+    branches:
+      - 'develop'
+      - 'main'
+
+jobs:
+  # Job to run tests
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Set up Docker
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Node.js (if needed for Node.js projects)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Replace with your Node.js version
+
+      - name: Install dependencies
+        run: |
+          npm install  # Or replace with your project's dependency manager (e.g., pip, yarn)
+
+      - name: Run tests
+        run: |
+          npm test  # Replace with your test command (e.g., `pytest` for Python, `mvn test` for Java)
+
+  # Job to build and push Docker images to Docker Hub
+  build-and-push:
+    needs: test  # This ensures that the 'build-and-push' job only runs after 'test' job passes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}  # Docker Hub username (set as secret in GitHub)
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Docker Hub password (set as secret in GitHub)
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t wajahat001/phpmyadmin:5.1.1 .
+          docker build -t wajahat001/mysql:5.6 .
+          docker build -t wajahat001/httpd:2.4.51 
+          
+          docker push -t wajahat001/phpmyadmin:5.1.1 .
+          docker push -t mysql:5.6 .
+          docker push -t httpd:2.4.51  # Replace with your image name
+
