@@ -62,4 +62,3 @@ Check documentation for more details : https://docs.docker.com/compose/gettingst
 
 * In the left column, select the `mydatabase` database to start
 
-![](./README_assets/screenshot2.png)
