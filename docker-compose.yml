@@ -1,0 +1,56 @@
+version: "3.3"
+services:
+  mysql:
+    image: mysql:5.6
+    container_name: soft-eng-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydatabase
+    ports:
+      - 4000:3306
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./db_model:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin:5.1.1
+    container_name: soft-eng-phpmyadmin
+    restart: always
+    logging:
+      driver: none
+    depends_on:
+      - mysql
+    ports:
+      - 4001:80
+    environment:
+      PMA_HOST: mysql
+  
+  backend:
+    build: ./backend
+    container_name: soft-eng-backend
+    restart: always
+    depends_on:
+      - mysql
+    command: npm run dev
+    ports:
+      - 4100:4100
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./backend:/home/node/backend
+      - /home/node/backend/node_modules
+
+  frontend:
+    image: httpd:2.4.51
+    container_name: soft-eng-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - 4200:80
+    volumes:
+      - ./frontend/:/usr/local/apache2/htdocs/
