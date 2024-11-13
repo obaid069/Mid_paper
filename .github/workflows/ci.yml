@@ -20,31 +20,26 @@ jobs:
         uses: actions/checkout@v3
 
       - name: List files for debugging
-        run: ls -R # This will help you confirm the directory structure
+        run: ls -R backend # Debugging step to ensure the right directory structure
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Install dependencies (root)
-        run: |
-          npm install  # This should install all dependencies including eslint
-          npx husky install  # Ensure husky is installed
-
-      - name: Verify Husky installation (root)
-        run: ls -l .husky  # Check the contents of the .husky directory in the root folder
-
-      - name: Install backend dependencies
-        working-directory: backend
+      - name: Install dependencies
+        working-directory: backend  # Correct path to 'backend' where package.json is located
         run: npm install
 
-      - name: Run linter checks
-        run: npm run lint  # This should now run without errors
+      - name: Run ESLint checks
+        run: npm run lint # Runs ESLint to check for issues
+
+      - name: Run Prettier checks
+        run: npm run prettier:check # Ensure Prettier formatting is followed
 
       - name: Skip tests (bypass)
         run: echo "Skipping tests... (bypassed)"
-        
+
   enforce-code-review:
     runs-on: ubuntu-latest
 
@@ -69,12 +64,21 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build and push Docker image
+      - name: Build and push Docker images
         run: |
-          docker build -t wajahat001/phpmyadmin:5.1.1 backend
-          docker build -t wajahat001/mysql:5.6 backend
-          docker build -t wajahat001/httpd:2.4.51 backend
+          docker build -t wajahat001/phpmyadmin:5.1.1 backend  # Use backend folder for Docker build context
+          docker build -t wajahat001/mysql:5.6 backend  # Use backend folder for Docker build context
+          docker build -t wajahat001/httpd:2.4.51 backend  # Use backend folder for Docker build context
           
           docker push wajahat001/phpmyadmin:5.1.1
           docker push wajahat001/mysql:5.6
           docker push wajahat001/httpd:2.4.51
+
+  check-husky:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check Husky installation
+        run: ls -l .husky # This checks if Husky is installed and the hooks are set up correctly
