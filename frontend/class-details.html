@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <title>Class details</title>
+</head>
+
+<body>
+  <nav>
+    <a href="..">Home</a> /
+    <a href="classes.html">Classes management</a> /
+    <span>Class details - ID: <span class="class-id"></span></span>
+  </nav>
+
+  <hr>
+
+  <header>
+    <h1>Class details - ID: <span class="class-id"></span></h1>
+  </header>
+  <main>
+    <table id="class-table">
+      <tr>
+        <th>Level:</th>
+        <td id="class-level"></td>
+      </tr>
+    </table>
+
+    <h2>Assigned teacher - ID: <span id="teacher-id"></span></h2>
+
+    <p id="no-teacher">
+      <strong>No Teacher assigned !</strong>
+    </p>
+
+    <table id="teacher-table">
+      <tr>
+        <th>Name:</th>
+        <td id="teacher-name"></td>
+      </tr>
+      <tr>
+        <th>Email:</th>
+        <td id="teacher-email"></td>
+      </tr>
+      <tr>
+        <th>Gender:</th>
+        <td id="teacher-gender"></td>
+      </tr>
+    </table>
+    
+    <h2>Registered students</h2>
+
+    <p id="no-students">
+      <strong>No students registered !</strong>
+    </p>
+
+    <table id="students-table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Birthday</th>
+        <th>Gender</th>
+      </tr>
+    </table>
+
+  </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="js/class-details.js"></script>
+</body>
+
+</html>

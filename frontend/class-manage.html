@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="stylesheet" href="css/style.css">
+  <title>Class management</title>
+</head>
+
+<body>
+  <nav>
+    <a href="..">Home</a> /
+    <a href="classes.html">Classes management</a> /
+    Manage class - ID <span class="class-id"></span>
+  </nav>
+
+  <hr>
+
+  <header>
+    <h1>Manage class - ID <span class="class-id"></span></h1>
+  </header>
+  <main>
+    <strong>Level:</strong> <span id="level"></span>
+
+    <h2>Assign teacher</h2>
+
+    <p id="no-teachers">
+      <strong>No teachers !</strong>
+    </p>
+
+    <table id="teachers-table">
+      <tr>
+        <th></th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+      </tr>
+    </table>
+
+    <button id="save-teacher" type="button" disabled onclick="saveAssignTeacher()">Save</button>
+    <strong id="saved-assign-teacher-notif"></strong>
+
+    <h2>Students registrations</h2>
+    <div class="grid-div">
+      <h3>Registered students</h3>
+      <h3>Unregistered students</h3>
+
+      <div>
+        <strong id="no-registered-students">No registered students !</strong>
+        <table id="registered-students">
+          <tr class="text-darkgreen">
+            <th></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Gender</th>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <strong id="no-unregistered-students">No unregistered students !</strong>
+        <table id="unregistered-students">
+          <tr class="text-darkred">
+            <th></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Gender</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="js/class-manage.js"></script>
+</body>
+
+</html>
