@@ -29,8 +29,8 @@ jobs:
 
       - name: Install dependencies (root)
         run: |
-          npm install  # This should install Husky in the root directory
-          npx husky install  # Explicitly install Husky
+          npm install  # This should install all dependencies including eslint
+          npx husky install  # Ensure husky is installed
 
       - name: Verify Husky installation (root)
         run: ls -l .husky  # Check the contents of the .husky directory in the root folder
@@ -40,7 +40,7 @@ jobs:
         run: npm install
 
       - name: Run linter checks
-        run: npm run lint
+        run: npm run lint  # This should now run without errors
 
       - name: Skip tests (bypass)
         run: echo "Skipping tests... (bypassed)"
@@ -78,4 +78,3 @@ jobs:
           docker push wajahat001/phpmyadmin:5.1.1
           docker push wajahat001/mysql:5.6
           docker push wajahat001/httpd:2.4.51
-
