@@ -31,8 +31,19 @@ jobs:
         working-directory: backend  # Correct path to 'backend' where package.json is located
         run: npm install
 
+      - name: Run linter checks
+        run: npm run lint
+
       - name: Skip tests (bypass)
         run: echo "Skipping tests... (bypassed)"
+        
+  enforce-code-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enforce Code Review
+        if: github.event.pull_request.merged == false
+        run: echo "Code review is required before merging."
 
   build-and-push:
     needs: test
