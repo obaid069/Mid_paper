@@ -20,23 +20,24 @@ jobs:
         uses: actions/checkout@v3
 
       - name: List files for debugging
-        run: ls -R backend # This will help you confirm the directory structure
+        run: ls -R # This will help you confirm the directory structure
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        working-directory: backend  # Correct path to 'backend' where package.json is located
-        run: npm install
+      - name: Install dependencies (root)
+        run: |
+          npm install  # This should install Husky in the root directory
+          npx husky install  # Explicitly install Husky
 
-      - name: Install Husky
+      - name: Verify Husky installation (root)
+        run: ls -l .husky  # Check the contents of the .husky directory in the root folder
+
+      - name: Install backend dependencies
         working-directory: backend
-        run: npm run prepare  # This will run husky install
-
-      - name: Verify Husky installation
-        run: ls -l backend/.husky  # Check the contents of the .husky directory
+        run: npm install
 
       - name: Run linter checks
         run: npm run lint
@@ -70,10 +71,11 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t wajahat001/phpmyadmin:5.1.1 backend  # Use backend folder for Docker build context
-          docker build -t wajahat001/mysql:5.6 backend  # Use backend folder for Docker build context
-          docker build -t wajahat001/httpd:2.4.51 backend  # Use backend folder for Docker build context
+          docker build -t wajahat001/phpmyadmin:5.1.1 backend
+          docker build -t wajahat001/mysql:5.6 backend
+          docker build -t wajahat001/httpd:2.4.51 backend
           
           docker push wajahat001/phpmyadmin:5.1.1
           docker push wajahat001/mysql:5.6
           docker push wajahat001/httpd:2.4.51
+
