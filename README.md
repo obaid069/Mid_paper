@@ -58,8 +58,3 @@ Check documentation for more details : https://docs.docker.com/compose/gettingst
 * After running `docker-compose up --build` command, open your browser and navigate to URL http://localhost:4001 to open *phpMyAdmin login page*
 * Use `superuser` account credentials:
 
-![](./README_assets/screenshot1.png)
-
-* In the left column, select the `mydatabase` database to start
-
-![](./README_assets/screenshot2.png)
