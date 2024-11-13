@@ -31,7 +31,7 @@ jobs:
         working-directory: backend  # Correct path to 'backend' where package.json is located
         run: npm install
 
-      - name: Run tests
+      - name:  Run dummy test (bypass)
         working-directory: backend  # Ensure this is where the test scripts are
         run: npm test
 
