@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <title>Classes management</title>
+</head>
+
+<body>
+  <nav>
+    <a href="..">Home</a> /
+    <a href="classes.html">Classes management</a> /
+    <span class="title">Insert new class</span>
+  </nav>
+
+  <hr>
+
+  <header>
+    <h1 class="title">Insert new class</h1>
+  </header>
+  <main>
+    <form method="POST" action="classes.html" id="new-class-form">
+      <table>
+        <tr>
+          <th><label for="level">Level:</label></th>
+          <td><input type="text" id="level" level="name"></td>
+        </tr>
+      </table>
+      <input type="button" value="Cancel" onclick="window.location.href='classes.html'">
+      <input type="button" value="Save" onclick="submitButtonClick()">
+    </form>
+  </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="js/class-form.js"></script>
+</body>
+
+</html>

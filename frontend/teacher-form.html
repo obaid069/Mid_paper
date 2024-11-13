@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <title>Teachers management</title>
+</head>
+
+<body>
+  <nav>
+    <a href="..">Home</a> /
+    <a href="teachers.html">Teachers management</a> /
+    <span class="title">Insert new teacher</span>
+  </nav>
+
+  <hr>
+
+  <header>
+    <h1 class="title">Insert new teacher</h1>
+  </header>
+  <main>
+    <form method="POST" action="teachers.html" id="new-teacher-form">
+      <table>
+        <tr>
+          <th><label for="name">Name:</label></th>
+          <td><input type="text" id="name" name="name"></td>
+        </tr>
+        <tr>
+          <th><label for="email">Email:</label></th>
+          <td><input type="email" id="email" name="email"></td>
+        </tr>
+        <tr>
+          <th><label for="gender">Gender:</label></th>
+          <td>
+            <select id="gender" name="gender">
+              <option disabled selected>Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <input type="button" value="Cancel" onclick="window.location.href='teachers.html'">
+      <input type="button" value="Save" onclick="submitButtonClick()">
+    </form>
+  </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="js/teacher-form.js"></script>
+</body>
+
+</html>
