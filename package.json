@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "eslint": "^9.14.0",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.10"
   },
