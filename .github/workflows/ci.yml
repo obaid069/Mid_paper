@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install dependencies
         working-directory: backend  # Correct path to 'backend' where package.json is located
@@ -52,10 +52,10 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t wajahat001/phpmyadmin:5.1.1 backend  # Use backend folder for Docker build context
-          docker build -t wajahat001/mysql:5.6 backend  # Use backend folder for Docker build context
-          docker build -t wajahat001/httpd:2.4.51 backend  # Use backend folder for Docker build context
+          docker build -t obaid069/phpmyadmin:5.1.1 backend  # Use backend folder for Docker build context
+          docker build -t obaid069/mysql:5.6 backend  # Use backend folder for Docker build context
+          docker build -t obaid069/httpd:2.4.51 backend  # Use backend folder for Docker build context
           
-          docker push wajahat001/phpmyadmin:5.1.1
-          docker push wajahat001/mysql:5.6
-          docker push wajahat001/httpd:2.4.51
+          docker push obaid069/phpmyadmin:5.1.1
+          docker push obaid069/mysql:5.6
+          docker push obaid069/httpd:2.4.51
