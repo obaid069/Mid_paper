@@ -4,6 +4,13 @@
     "lint-staged": "^15.2.10"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint ."
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
