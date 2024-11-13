@@ -1,0 +1,42 @@
+name: Pull Request Workflow
+
+on:
+  pull_request:
+    branches:
+      - develop  # This will trigger the workflow when a PR is made to the 'develop' branch
+
+jobs:
+  enforce-code-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if code review is required
+        run: |
+          # Check if there are at least one approval for the pull request
+          REVIEWERS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                            "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews" | \
+                            jq '[.[] | select(.state == "APPROVED")] | length')
+          if [ "$REVIEWERS" -lt 1 ]; then
+            echo "At least one code review approval is required before merging."
+            exit 1
+          else
+            echo "Code review is approved."
+          fi
+
+  run-integration-tests:
+    needs: enforce-code-review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js (for integration tests)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run integration tests
+        run: npm run test-integration  # Ensure this is your script for integration tests
