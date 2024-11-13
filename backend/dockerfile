@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:20
 # Set working directory
 WORKDIR /home/node/backend
 # Copy package.json & package-lock.json into the working directory
