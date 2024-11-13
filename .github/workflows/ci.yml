@@ -1,51 +1,39 @@
 name: CI/CD Pipeline
 
-# Trigger the workflow on push to 'feature/*', 'develop', and 'main' branches
 on:
   push:
     branches:
-      - 'feature/*'     # Any feature branches
-      - 'develop'       # Develop branch
-      - 'main'          # Main branch
+      - 'feature/*'
+      - 'develop'
+      - 'main'
 
-  # Optional: Trigger on pull request events
   pull_request:
     branches:
       - 'develop'
       - 'main'
 
 jobs:
-  # Job to run tests
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Set up Docker
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Node.js (if needed for Node.js projects)
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Replace with your Node.js version
+          node-version: '20'
 
       - name: Install dependencies
-        working-directory: ./template-main/backend
-        run: |
-          npm install  # Or replace with your project's dependency manager (e.g., pip, yarn)
+        working-directory: template-main/backend  # Ensure this matches your repo structure
+        run: npm install
 
       - name: Run tests
-        working-directory: ./template-main/backend
-        run: |
-          npm test  # Replace with your test command (e.g., `pytest` for Python, `mvn test` for Java)
+        working-directory: template-main/backend  # Ensure this matches your repo structure
+        run: npm test
 
-  # Job to build and push Docker images to Docker Hub
   build-and-push:
-    needs: test  # This ensures that the 'build-and-push' job only runs after 'test' job passes
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -54,8 +42,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}  # Docker Hub username (set as secret in GitHub)
-          password: ${{ secrets.DOCKER_PASSWORD }}  # Docker Hub password (set as secret in GitHub)
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -64,9 +52,10 @@ jobs:
         run: |
           docker build -t wajahat001/phpmyadmin:5.1.1 .
           docker build -t wajahat001/mysql:5.6 .
-          docker build -t wajahat001/httpd:2.4.51 
+          docker build -t wajahat001/httpd:2.4.51 .
           
-          docker push -t wajahat001/phpmyadmin:5.1.1 .
-          docker push -t mysql:5.6 .
-          docker push -t httpd:2.4.51  # Replace with your image name
+          docker push wajahat001/phpmyadmin:5.1.1
+          docker push wajahat001/mysql:5.6
+          docker push wajahat001/httpd:2.4.51
+
 
