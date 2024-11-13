@@ -1,0 +1,13 @@
+FROM node:12
+# Set working directory
+WORKDIR /home/node/backend
+# Copy package.json & package-lock.json into the working directory
+COPY package*.json ./
+# Build for production
+RUN npm install
+# Copy app
+COPY ./ ./
+# Expose port
+EXPOSE 4100
+#Start
+CMD npm run dev

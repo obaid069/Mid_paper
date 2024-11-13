@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "Backend for the soft-eng project",
+  "main": "app.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.95.7",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1"
+  },
+  "scripts": {
+    "start": "node app/app.js",
+    "dev": "nodemon app/app.js --watch app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
