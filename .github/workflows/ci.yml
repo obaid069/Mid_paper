@@ -31,6 +31,13 @@ jobs:
         working-directory: backend  # Correct path to 'backend' where package.json is located
         run: npm install
 
+      - name: Install Husky
+        working-directory: backend
+        run: npm run prepare  # This will run husky install
+
+      - name: Verify Husky installation
+        run: ls -l backend/.husky  # Check the contents of the .husky directory
+
       - name: Run linter checks
         run: npm run lint
 
@@ -70,4 +77,3 @@ jobs:
           docker push wajahat001/phpmyadmin:5.1.1
           docker push wajahat001/mysql:5.6
           docker push wajahat001/httpd:2.4.51
-
