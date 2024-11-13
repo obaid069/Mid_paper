@@ -34,10 +34,12 @@ jobs:
           node-version: '20'  # Replace with your Node.js version
 
       - name: Install dependencies
+        working-directory: ./template-main/backend
         run: |
           npm install  # Or replace with your project's dependency manager (e.g., pip, yarn)
 
       - name: Run tests
+        working-directory: ./template-main/backend
         run: |
           npm test  # Replace with your test command (e.g., `pytest` for Python, `mvn test` for Java)
 
