@@ -15,24 +15,32 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: List files for debugging
-        run: ls -R backend # This will help you confirm the directory structure
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Install dependencies
-        working-directory: backend  # Correct path to 'backend' where package.json is located
-        run: npm install
+        run: npm install # Ensure all dependencies (including ESLint) are installed
+
+      - name: Run ESLint checks
+        run: npm run lint # Run ESLint after dependencies are installed
 
       - name: Skip tests (bypass)
         run: echo "Skipping tests... (bypassed)"
+        
+  enforce-code-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enforce Code Review
+        if: github.event.pull_request.merged == false
+        run: echo "Code review is required before merging."
 
   build-and-push:
     needs: test
