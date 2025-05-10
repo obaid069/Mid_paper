@@ -60,15 +60,6 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-<<<<<<< HEAD
-          docker build -t wajahat001/phpmyadmin:5.1.1 backend  # Use backend folder for Docker build context
-          docker build -t wajahat001/mysql:5.6 backend  # Use backend folder for Docker build context
-          docker build -t wajahat001/httpd:2.4.51 backend  # Use backend folder for Docker build context
-          
-          docker push wajahat001/phpmyadmin:5.1.1
-          docker push wajahat001/mysql:5.6
-          docker push wajahat001/httpd:2.4.51
-=======
           docker build -t obaid069/phpmyadmin:5.1.1 backend  # Use backend folder for Docker build context
           docker build -t obaid069/mysql:5.6 backend  # Use backend folder for Docker build context
           docker build -t obaid069/httpd:2.4.51 backend  # Use backend folder for Docker build context
@@ -76,4 +67,4 @@ jobs:
           docker push obaid069/phpmyadmin:5.1.1
           docker push obaid069/mysql:5.6
           docker push obaid069/httpd:2.4.51
->>>>>>> 50af907cfdced2dde473e0ae2a2a10a260e43ec5
+
