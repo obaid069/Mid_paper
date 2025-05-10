@@ -4,6 +4,12 @@
 
 ### Setting up the environment
 
+<<<<<<< HEAD
+=======
+* Install **Docker Engine** from this link: https://docs.docker.com/engine/install/
+* Install **Docker Compose** from this link: https://docs.docker.com/compose/install/
+* Run the Docker Engine (depends on your OS, can be automatic or manual)
+>>>>>>> 50af907cfdced2dde473e0ae2a2a10a260e43ec5
 * Download this project and unzip it in your working folder
 
 ### Run your project with docker-compose step by step
@@ -55,4 +61,7 @@ Check documentation for more details : https://docs.docker.com/compose/gettingst
 * After running `docker-compose up --build` command, open your browser and navigate to URL http://localhost:4001 to open *phpMyAdmin login page*
 * Use `superuser` account credentials:
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 50af907cfdced2dde473e0ae2a2a10a260e43ec5
