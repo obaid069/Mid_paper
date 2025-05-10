@@ -26,10 +26,10 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install # Ensure all dependencies (including ESLint) are installed
+        run: npm install
 
       - name: Run ESLint checks
-        run: npm run lint # Run ESLint after dependencies are installed
+        run: npm run lint
 
       - name: Skip tests (bypass)
         run: echo "Skipping tests... (bypassed)"
@@ -58,13 +58,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build and push Docker image
+      - name: Build and push Docker images
         run: |
-          docker build -t obaid069/phpmyadmin:5.1.1 backend  # Use backend folder for Docker build context
-          docker build -t obaid069/mysql:5.6 backend  # Use backend folder for Docker build context
-          docker build -t obaid069/httpd:2.4.51 backend  # Use backend folder for Docker build context
-          
+          docker build -t obaid069/phpmyadmin:5.1.1 backend
+          docker build -t obaid069/mysql:5.6 backend
+          docker build -t obaid069/httpd:2.4.51 backend
+
           docker push obaid069/phpmyadmin:5.1.1
           docker push obaid069/mysql:5.6
           docker push obaid069/httpd:2.4.51
-
