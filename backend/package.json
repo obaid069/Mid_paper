@@ -14,19 +14,13 @@
     "start": "node app/app.js",
     "dev": "nodemon app/app.js --watch app",
     "test": "echo \"Error: no test specified\" && exit 1"
-<<<<<<< HEAD
 
     
-=======
->>>>>>> 50af907cfdced2dde473e0ae2a2a10a260e43ec5
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.12"
   }
-<<<<<<< HEAD
 
-=======
->>>>>>> 50af907cfdced2dde473e0ae2a2a10a260e43ec5
 }
